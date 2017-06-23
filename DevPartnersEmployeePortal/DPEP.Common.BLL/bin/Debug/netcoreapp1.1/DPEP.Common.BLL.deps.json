@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v1.1": {
       "dpep.common.bll/1.0.0": {
         "dependencies": {
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "2.0.1",
           "DPEP.Common.DAL": "1.0.0",
           "Microsoft.AspNetCore.Mvc": "1.1.3",
           "Swashbuckle.AspNetCore": "1.0.0"
