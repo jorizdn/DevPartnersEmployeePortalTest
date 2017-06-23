@@ -10994,10 +10994,10 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DEV PARTNERS\\documents\\visual studio 2017\\Projects\\DevPartnersEmployeePortal\\DPEP.Admin.UI\\DPEP.Admin.UI.csproj",
+      "projectUniqueName": "C:\\Users\\DEV PARTNERS\\Documents\\GitHub\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortal\\DPEP.Admin.UI\\DPEP.Admin.UI.csproj",
       "projectName": "DPEP.Admin.UI",
-      "projectPath": "C:\\Users\\DEV PARTNERS\\documents\\visual studio 2017\\Projects\\DevPartnersEmployeePortal\\DPEP.Admin.UI\\DPEP.Admin.UI.csproj",
-      "outputPath": "C:\\Users\\DEV PARTNERS\\documents\\visual studio 2017\\Projects\\DevPartnersEmployeePortal\\DPEP.Admin.UI\\obj\\",
+      "projectPath": "C:\\Users\\DEV PARTNERS\\Documents\\GitHub\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortal\\DPEP.Admin.UI\\DPEP.Admin.UI.csproj",
+      "outputPath": "C:\\Users\\DEV PARTNERS\\Documents\\GitHub\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortal\\DPEP.Admin.UI\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"
@@ -11005,11 +11005,11 @@
       "frameworks": {
         "netcoreapp1.1": {
           "projectReferences": {
-            "C:\\Users\\DEV PARTNERS\\documents\\visual studio 2017\\Projects\\DevPartnersEmployeePortal\\DPEP.Common.DAL\\DPEP.Common.DAL.csproj": {
-              "projectPath": "C:\\Users\\DEV PARTNERS\\documents\\visual studio 2017\\Projects\\DevPartnersEmployeePortal\\DPEP.Common.DAL\\DPEP.Common.DAL.csproj"
+            "C:\\Users\\DEV PARTNERS\\Documents\\GitHub\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortal\\DPEP.Common.DAL\\DPEP.Common.DAL.csproj": {
+              "projectPath": "C:\\Users\\DEV PARTNERS\\Documents\\GitHub\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortal\\DPEP.Common.DAL\\DPEP.Common.DAL.csproj"
             },
-            "C:\\Users\\DEV PARTNERS\\documents\\visual studio 2017\\Projects\\DevPartnersEmployeePortal\\DPEP.Common.BLL\\DPEP.Common.BLL.csproj": {
-              "projectPath": "C:\\Users\\DEV PARTNERS\\documents\\visual studio 2017\\Projects\\DevPartnersEmployeePortal\\DPEP.Common.BLL\\DPEP.Common.BLL.csproj"
+            "C:\\Users\\DEV PARTNERS\\Documents\\GitHub\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortal\\DPEP.Common.BLL\\DPEP.Common.BLL.csproj": {
+              "projectPath": "C:\\Users\\DEV PARTNERS\\Documents\\GitHub\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortal\\DPEP.Common.BLL\\DPEP.Common.BLL.csproj"
             }
           }
         }

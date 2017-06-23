@@ -5,3 +5,10 @@ c:\users\dev partners\documents\visual studio 2017\Projects\DevPartnersEmployeeP
 c:\users\dev partners\documents\visual studio 2017\Projects\DevPartnersEmployeePortal\DPEP.Common.DAL\bin\Debug\netcoreapp1.1\DPEP.Common.DAL.pdb
 c:\users\dev partners\documents\visual studio 2017\Projects\DevPartnersEmployeePortal\DPEP.Common.DAL\obj\Debug\netcoreapp1.1\DPEP.Common.DAL.dll
 c:\users\dev partners\documents\visual studio 2017\Projects\DevPartnersEmployeePortal\DPEP.Common.DAL\obj\Debug\netcoreapp1.1\DPEP.Common.DAL.pdb
+C:\Users\DEV PARTNERS\Documents\GitHub\DevPartnersEmployeePortalTest\DevPartnersEmployeePortal\DPEP.Common.DAL\bin\Debug\netcoreapp1.1\DPEP.Common.DAL.deps.json
+C:\Users\DEV PARTNERS\Documents\GitHub\DevPartnersEmployeePortalTest\DevPartnersEmployeePortal\DPEP.Common.DAL\bin\Debug\netcoreapp1.1\DPEP.Common.DAL.dll
+C:\Users\DEV PARTNERS\Documents\GitHub\DevPartnersEmployeePortalTest\DevPartnersEmployeePortal\DPEP.Common.DAL\bin\Debug\netcoreapp1.1\DPEP.Common.DAL.pdb
+C:\Users\DEV PARTNERS\Documents\GitHub\DevPartnersEmployeePortalTest\DevPartnersEmployeePortal\DPEP.Common.DAL\obj\Debug\netcoreapp1.1\DPEP.Common.DAL.csprojResolveAssemblyReference.cache
+C:\Users\DEV PARTNERS\Documents\GitHub\DevPartnersEmployeePortalTest\DevPartnersEmployeePortal\DPEP.Common.DAL\obj\Debug\netcoreapp1.1\DPEP.Common.DAL.AssemblyInfo.cs
+C:\Users\DEV PARTNERS\Documents\GitHub\DevPartnersEmployeePortalTest\DevPartnersEmployeePortal\DPEP.Common.DAL\obj\Debug\netcoreapp1.1\DPEP.Common.DAL.dll
+C:\Users\DEV PARTNERS\Documents\GitHub\DevPartnersEmployeePortalTest\DevPartnersEmployeePortal\DPEP.Common.DAL\obj\Debug\netcoreapp1.1\DPEP.Common.DAL.pdb
