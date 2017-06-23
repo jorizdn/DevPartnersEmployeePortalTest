@@ -15,6 +15,7 @@ namespace DPEP.Common.BLL.ConfigServices
             services.AddTransient<DevPartnersEmployeeContext>();
 
             services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IStatusRepository, StatusRepository>();
 
             return services;
         }
