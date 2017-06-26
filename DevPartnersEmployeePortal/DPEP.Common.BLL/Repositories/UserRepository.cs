@@ -13,28 +13,22 @@ namespace DPEP.Common.BLL.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly DevPartnersEmployeeContext _context;
-        public UserRepository(DevPartnersEmployeeContext context)
+        private readonly IMapper _mapper;
+
+        public UserRepository(DevPartnersEmployeeContext context,IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public void AddUser(AddEmployeeModel user)
         {
-            var company = new Company()
-            {
-                CompanyCode = user.employeeID,
-                EmailAddress = user.emailAddress
-            };
+            var company = Mapper.Map<Company>(user);
             _context.Company.Add(company);
             _context.SaveChanges();
 
-            var model = new AspNetUser()
-            {
-                FirstName = user.fname,
-                LastName = user.lname,
-                CompanyId = company.CompanyId
-            };
-            _context.AspNetUser.Add(model);
+            var aspNetUser = Mapper.Map<AspNetUser>(user);
+            _context.AspNetUser.Add(aspNetUser);
             _context.SaveChanges();
         }
 

@@ -12,10 +12,10 @@ namespace DPEP.Common.BLL.ConfigServices
     {
         public MapperProfile()
         {
-            CreateMap<AspNetUser, AddEmployeeModel>();
-            CreateMap<Company, AddEmployeeModel>()
-                .ForMember(dest => dest.employeeID, opt => opt.MapFrom(src => src.CompanyCode))
-                .ForMember(dest => dest.emailAddress, opt => opt.MapFrom(src => src.EmailAddress));
+            CreateMap<AddEmployeeModel, AspNetUser>();
+            CreateMap<AddEmployeeModel, Company>()
+                .ForMember(dest => dest.CompanyCode, opt => opt.MapFrom(src => src.employeeID))
+                .ForMember(dest => dest.EmailAddress, opt => opt.MapFrom(src => src.emailAddress));
         }
     }
 
