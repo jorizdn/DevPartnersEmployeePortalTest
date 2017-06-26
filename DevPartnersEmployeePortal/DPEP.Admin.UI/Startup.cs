@@ -34,6 +34,8 @@ namespace DPEP.Admin.UI
             services.RegisterSqlServer(connection);
             services.RegisterSwagger();
             services.RegisterDInjections();
+            services.RegisterMapper();
+
             services.AddMvc();
         }
 

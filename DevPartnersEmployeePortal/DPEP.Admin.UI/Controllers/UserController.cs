@@ -25,7 +25,7 @@ namespace DPEP.Admin.UI.Controllers
         {
             return _context.GetAllUsers();
         }
-
+         
 
         [HttpGet("{id}")]
         public AspNetUser GetUser([FromRoute] int id)
