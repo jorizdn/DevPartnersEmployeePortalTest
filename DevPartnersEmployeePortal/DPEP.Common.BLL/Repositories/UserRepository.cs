@@ -45,33 +45,13 @@ namespace DPEP.Common.BLL.Repositories
 
         public AspNetUser GetUser(int id)
         {
-            throw new NotImplementedException();
+            return _context.AspNetUser.FirstOrDefault(a => a.AspNetUserId == id);
         }
 
         public void RemoveUser(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateUser(AspNetUser user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<AddEmployeeModel> GetEmployees()
-        {
-            List<AddEmployeeModel> entities = new List<AddEmployeeModel>() { };
-
-            foreach (var item in _context.AspNetUser)
-            {
-                var model = new AddEmployeeModel();
-                 model.fname = item.FirstName;
-                 model.lname = item.LastName;
-
-                entities.Add(model);
-            }
-
-            return entities;
+            _context.AspNetUser.Remove(_context.AspNetUser.Find(id));
+            _context.SaveChanges();
         }
 
     }

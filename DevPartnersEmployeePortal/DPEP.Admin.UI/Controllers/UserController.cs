@@ -20,11 +20,18 @@ namespace DPEP.Admin.UI.Controllers
             _context = context;
         }
 
-        //[HttpGet]
-        //public IEnumerable<AspNetUser> GetAllUsers()
-        //{
-        //    return _context.GetAllUsers();
-        //}
+        [HttpGet]
+        public IEnumerable<AspNetUser> GetAllUsers()
+        {
+            return _context.GetAllUsers();
+        }
+
+
+        [HttpGet("{id}")]
+        public AspNetUser GetUser([FromRoute] int id)
+        {
+            return _context.GetUser(id);
+        }
 
         [HttpPost]
         public IActionResult PostUser([FromBody] AddEmployeeModel user)
@@ -33,11 +40,20 @@ namespace DPEP.Admin.UI.Controllers
             return Ok();
         }
 
-        [HttpGet]
-        public IEnumerable<AddEmployeeModel> GetEmployees()
+        [HttpDelete("{id}")]
+        public IActionResult DeleteUser([FromBody] int id)
         {
-            return _context.GetEmployees();
+            if (_context.GetUser(id) != null)
+            {
+                _context.RemoveUser(id);
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
         }
+
 
     }
 

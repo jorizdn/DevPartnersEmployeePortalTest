@@ -9,10 +9,8 @@ namespace DPEP.Common.BLL.Interfaces
     public interface IUserRepository
     {
         IEnumerable<AspNetUser> GetAllUsers();
-        IEnumerable<AddEmployeeModel> GetEmployees();
         AspNetUser GetUser(int id);
         void AddUser(AddEmployeeModel user);
-        void UpdateUser(AspNetUser user);
         void RemoveUser(int id);
     }
 }
