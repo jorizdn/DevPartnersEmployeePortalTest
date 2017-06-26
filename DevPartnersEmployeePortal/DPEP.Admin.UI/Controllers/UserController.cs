@@ -41,7 +41,7 @@ namespace DPEP.Admin.UI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteUser([FromBody] int id)
+        public IActionResult DeleteUser([FromRoute] int id)
         {
             if (_context.GetUser(id) != null)
             {

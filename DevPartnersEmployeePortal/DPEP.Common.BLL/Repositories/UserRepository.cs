@@ -51,6 +51,7 @@ namespace DPEP.Common.BLL.Repositories
         public void RemoveUser(int id)
         {
             _context.AspNetUser.Remove(_context.AspNetUser.Find(id));
+            _context.Company.Remove(_context.Company.Find(id));
             _context.SaveChanges();
         }
 

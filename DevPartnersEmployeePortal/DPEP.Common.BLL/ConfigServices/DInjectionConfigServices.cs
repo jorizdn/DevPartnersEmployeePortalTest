@@ -17,6 +17,7 @@ namespace DPEP.Common.BLL.ConfigServices
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IStatusRepository, StatusRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<ICompanyRepository, CompanyRepository>();
 
             return services;
         }
