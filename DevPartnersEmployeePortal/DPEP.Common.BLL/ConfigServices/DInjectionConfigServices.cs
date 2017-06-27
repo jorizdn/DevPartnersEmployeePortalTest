@@ -1,6 +1,8 @@
 ﻿using DPEP.Common.BLL.Interfaces;
+using DPEP.Common.BLL.Methods;
 using DPEP.Common.BLL.Repositories;
 using DPEP.Common.DAL.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -18,6 +20,8 @@ namespace DPEP.Common.BLL.ConfigServices
             services.AddTransient<IStatusRepository, StatusRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ICompanyRepository, CompanyRepository>();
+            services.AddTransient<SendEmail>();
+            services.AddTransient<EmailDaemon>();
 
             return services;
         }

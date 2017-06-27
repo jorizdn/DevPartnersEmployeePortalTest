@@ -1,8 +1,7 @@
 ﻿using DPEP.Common.DAL.Entities;
 using DPEP.Common.DAL.Model;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace DPEP.Common.BLL.Interfaces
 {
@@ -12,5 +11,6 @@ namespace DPEP.Common.BLL.Interfaces
         AspNetUser GetUser(int id);
         void AddUser(AddEmployeeModel user);
         void RemoveUser(int id);
+        Task<string> GenerateEmail(string userEmail, string uri);
     }
 }

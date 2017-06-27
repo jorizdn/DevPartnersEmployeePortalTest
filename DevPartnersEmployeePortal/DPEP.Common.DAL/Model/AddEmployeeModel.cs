@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DPEP.Common.DAL.Model
+﻿namespace DPEP.Common.DAL.Model
 {
     public class AddEmployeeModel
     {

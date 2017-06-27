@@ -8,11 +8,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using DPEP.Common.BLL.ConfigServices;
+using DPEP.Common.DAL.Model;
 
 namespace DPEP.Admin.UI
 {
     public class Startup
     {
+        private static IConfigurationRoot _configurationRoot;
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -32,11 +34,22 @@ namespace DPEP.Admin.UI
 
             // Add framework services.
             services.RegisterSqlServer(connection);
+            services.RegisterIdentities(connection);
             services.RegisterSwagger();
             services.RegisterDInjections();
             services.RegisterMapper();
 
             services.AddMvc();
+
+            //#region appSettings
+
+            //services.Configure<AppSettingModel>(_configurationRoot.GetSection("Document"));
+            //services.Configure<AppSettingModel>(_configurationRoot.GetSection("SwaggerAuthentication"));
+            //services.Configure<AppSettingModel>(_configurationRoot.GetSection("EmailNotification"));
+            //services.Configure<AppSettingModel>(_configurationRoot.GetSection("Captcha"));
+            //services.Configure<AppSettingModel>(_configurationRoot.GetSection("PipeDrive"));
+
+            //#endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

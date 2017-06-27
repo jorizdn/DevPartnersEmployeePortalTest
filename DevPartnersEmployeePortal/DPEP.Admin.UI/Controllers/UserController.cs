@@ -36,7 +36,10 @@ namespace DPEP.Admin.UI.Controllers
         [HttpPost]
         public IActionResult PostUser([FromBody] AddEmployeeModel user)
         {
+            var uri = HttpContext.Request.Host.Value;
+
             _context.AddUser(user);
+            _context.GenerateEmail(user.emailAddress, uri);
             return Ok();
         }
 

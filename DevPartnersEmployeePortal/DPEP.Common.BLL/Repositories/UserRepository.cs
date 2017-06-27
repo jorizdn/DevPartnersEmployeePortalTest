@@ -7,18 +7,27 @@ using DPEP.Common.DAL.Model;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using DPEP.Common.DAL.Identity;
+using DPEP.Common.BLL.Methods;
 
 namespace DPEP.Common.BLL.Repositories
 {
     public class UserRepository : IUserRepository
     {
         private readonly DevPartnersEmployeeContext _context;
-        private readonly IMapper _mapper;
+        private readonly SendEmail _sendEmail;
 
-        public UserRepository(DevPartnersEmployeeContext context,IMapper mapper)
+        private readonly IMapper _mapper;
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public UserRepository(DevPartnersEmployeeContext context,IMapper mapper, SendEmail sendEmail, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _mapper = mapper;
+            _sendEmail = sendEmail;
+            _userManager = userManager;
         }
 
         public void AddUser(AddEmployeeModel user)
@@ -47,6 +56,31 @@ namespace DPEP.Common.BLL.Repositories
             _context.AspNetUser.Remove(_context.AspNetUser.Find(id));
             _context.Company.Remove(_context.Company.Find(id));
             _context.SaveChanges();
+        }
+
+        public async Task<string> GenerateEmail(string userEmail, string uri)
+        {
+
+            var user = await _userManager.FindByEmailAsync(userEmail);
+            if (user != null)
+            {
+
+                var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+                var company = _context.Company.Find(userEmail);
+                var userGuid = (from cn in _context.AspNetUser
+                                where company.EmailAddress == userEmail
+                                select cn.Guid.Value.ToString()).FirstOrDefault();
+
+                var fullName = (from cn in _context.AspNetUser
+                                where company.EmailAddress == userEmail
+                                select cn.FirstName + " " + cn.LastName).FirstOrDefault();
+
+                var confirmUrl = "http://" + uri + $"/user/verification?guid={userGuid}&token={token}";
+                await _sendEmail.SendNow("Verify your account", "VerificationEmail-Template", userEmail, true, fullName, confirmUrl.Replace("api/", ""), uri, "", "", "");
+            }
+
+            return null;
         }
 
     }
