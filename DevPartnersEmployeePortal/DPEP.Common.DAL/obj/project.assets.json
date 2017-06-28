@@ -9619,10 +9619,10 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DEV PARTNERS\\Documents\\GitHub\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortal\\DPEP.Common.DAL\\DPEP.Common.DAL.csproj",
+      "projectUniqueName": "C:\\Users\\DEV PARTNERS\\Documents\\GitHub\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortal\\DPEP.Common.DAL\\DPEP.Common.DAL.csproj",
       "projectName": "DPEP.Common.DAL",
-      "projectPath": "C:\\Users\\DEV PARTNERS\\Documents\\GitHub\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortal\\DPEP.Common.DAL\\DPEP.Common.DAL.csproj",
-      "outputPath": "C:\\Users\\DEV PARTNERS\\Documents\\GitHub\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortal\\DPEP.Common.DAL\\obj\\",
+      "projectPath": "C:\\Users\\DEV PARTNERS\\Documents\\GitHub\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortal\\DPEP.Common.DAL\\DPEP.Common.DAL.csproj",
+      "outputPath": "C:\\Users\\DEV PARTNERS\\Documents\\GitHub\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortal\\DPEP.Common.DAL\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"

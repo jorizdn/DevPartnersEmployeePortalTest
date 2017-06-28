@@ -19,11 +19,11 @@ namespace DPEP.Common.BLL.ConfigServices
                .ForMember(c => c.CreatedDate, f => f.ResolveUsing(c => DateTime.UtcNow))
                .ForMember(c => c.UserName, f => f.ResolveUsing(c => c.Email.Split('@')[0]))
                .ForMember(c => c.IsActive, f => f.ResolveUsing(c => true));
-            CreateMap<AddEmployeeModel, AspNetUser>();
-            CreateMap<AddEmployeeModel, Company>()
+            CreateMap<AddUpModel, AspNetUser>();
+            CreateMap<AddUpModel, Company>()
                 .ForMember(dest => dest.CompanyCode, opt => opt.MapFrom(src => src.employeeID))
                 .ForMember(dest => dest.EmailAddress, opt => opt.MapFrom(src => src.emailAddress));
-            CreateMap<AddEmployeeModel, ApplicationUser>()
+            CreateMap<AddUpModel, ApplicationUser>()
                .ForMember(c => c.CreatedDate, f => f.ResolveUsing(c => DateTime.UtcNow))
                .ForMember(c => c.UserName, f => f.ResolveUsing(c => c.emailAddress.Split('@')[0]))
                .ForMember(c => c.IsActive, f => f.ResolveUsing(c => true));

@@ -1,6 +1,6 @@
 ﻿namespace DPEP.Common.DAL.Model
 {
-    public class AddEmployeeModel
+    public class AddUpModel
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

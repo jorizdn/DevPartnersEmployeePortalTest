@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using DPEP.Common.DAL.Identity;
 using DPEP.Common.BLL.Methods;
+using DPEP.Common.BLL.Helpers;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DPEP.Common.BLL.Repositories
 {
@@ -18,25 +20,29 @@ namespace DPEP.Common.BLL.Repositories
     {
         private readonly DevPartnersEmployeeContext _context;
         private readonly SendEmail _sendEmail;
+        private readonly ResponseBadRequest _badRequest;
 
         private readonly IMapper _mapper;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public UserRepository(DevPartnersEmployeeContext context,IMapper mapper, SendEmail sendEmail, UserManager<ApplicationUser> userManager)
+        public UserRepository(DevPartnersEmployeeContext context,IMapper mapper, SendEmail sendEmail, UserManager<ApplicationUser> userManager, ResponseBadRequest badRequest)
         {
             _context = context;
             _mapper = mapper;
             _sendEmail = sendEmail;
             _userManager = userManager;
+            _badRequest = badRequest;
         }
 
-        public void AddUser(AddEmployeeModel user)
+        public void AddUser(AddUpModel user)
         {
             var company = Mapper.Map<Company>(user);
             _context.Company.Add(company);
             _context.SaveChanges();
 
             var aspNetUser = Mapper.Map<AspNetUser>(user);
+            aspNetUser.CompanyId = company.CompanyId;
+            aspNetUser.DateCreated = DateTime.Now;
             _context.AspNetUser.Add(aspNetUser);
             _context.SaveChanges();
         }

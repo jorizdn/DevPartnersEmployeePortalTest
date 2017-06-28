@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DPEP.Common.BLL.Interfaces;
+using DPEP.Common.DAL.Entities;
 using DPEP.Common.DAL.Identity;
 using DPEP.Common.DAL.Model;
 using Microsoft.AspNetCore.Http;
@@ -20,13 +21,14 @@ namespace DPEP.Common.BLL.Repositories
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _accessor;
         private readonly string _role = "Client";
+        private readonly DevPartnersEmployeeContext _context;
 
         private readonly RoleManager<IdentityRole<int>> _roleManager;
         private readonly UserManager<ApplicationUser> _userManager;
         public Authenticate(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole<int>> roleManager,
-            SignInManager<ApplicationUser> manager, IMapper mapper, IHttpContextAccessor accessor)
+            SignInManager<ApplicationUser> manager, IMapper mapper, IHttpContextAccessor accessor, DevPartnersEmployeeContext context)
         {
-
+            _context = context;
             _userManager = userManager;
             _roleManager = roleManager;
             _manager = manager;
@@ -34,7 +36,7 @@ namespace DPEP.Common.BLL.Repositories
             _accessor = accessor;
         }
 
-        public async Task<CreatedUserModel> AddNewUser(AddEmployeeModel model)
+        public async Task<CreatedUserModel> AddNewUser(AddUpModel model)
         {
             return null;
         }

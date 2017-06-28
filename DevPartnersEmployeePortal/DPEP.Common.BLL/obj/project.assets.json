@@ -10467,10 +10467,10 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DEV PARTNERS\\Documents\\GitHub\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortal\\DPEP.Common.BLL\\DPEP.Common.BLL.csproj",
+      "projectUniqueName": "C:\\Users\\DEV PARTNERS\\Documents\\GitHub\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortal\\DPEP.Common.BLL\\DPEP.Common.BLL.csproj",
       "projectName": "DPEP.Common.BLL",
-      "projectPath": "C:\\Users\\DEV PARTNERS\\Documents\\GitHub\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortal\\DPEP.Common.BLL\\DPEP.Common.BLL.csproj",
-      "outputPath": "C:\\Users\\DEV PARTNERS\\Documents\\GitHub\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortal\\DPEP.Common.BLL\\obj\\",
+      "projectPath": "C:\\Users\\DEV PARTNERS\\Documents\\GitHub\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortal\\DPEP.Common.BLL\\DPEP.Common.BLL.csproj",
+      "outputPath": "C:\\Users\\DEV PARTNERS\\Documents\\GitHub\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortal\\DPEP.Common.BLL\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"
@@ -10478,8 +10478,8 @@
       "frameworks": {
         "netcoreapp1.1": {
           "projectReferences": {
-            "C:\\Users\\DEV PARTNERS\\Documents\\GitHub\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortal\\DPEP.Common.DAL\\DPEP.Common.DAL.csproj": {
-              "projectPath": "C:\\Users\\DEV PARTNERS\\Documents\\GitHub\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortal\\DPEP.Common.DAL\\DPEP.Common.DAL.csproj"
+            "C:\\Users\\DEV PARTNERS\\Documents\\GitHub\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortal\\DPEP.Common.DAL\\DPEP.Common.DAL.csproj": {
+              "projectPath": "C:\\Users\\DEV PARTNERS\\Documents\\GitHub\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortalTest\\DevPartnersEmployeePortal\\DPEP.Common.DAL\\DPEP.Common.DAL.csproj"
             }
           }
         }

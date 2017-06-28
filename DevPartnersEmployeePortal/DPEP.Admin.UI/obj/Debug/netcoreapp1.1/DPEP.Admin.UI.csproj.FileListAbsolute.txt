@@ -24,3 +24,16 @@ C:\Users\DEV PARTNERS\Documents\GitHub\DevPartnersEmployeePortalTest\DevPartners
 C:\Users\DEV PARTNERS\Documents\GitHub\DevPartnersEmployeePortalTest\DevPartnersEmployeePortal\DPEP.Admin.UI\obj\Debug\netcoreapp1.1\DPEP.Admin.UI.AssemblyInfo.cs
 C:\Users\DEV PARTNERS\Documents\GitHub\DevPartnersEmployeePortalTest\DevPartnersEmployeePortal\DPEP.Admin.UI\obj\Debug\netcoreapp1.1\DPEP.Admin.UI.dll
 C:\Users\DEV PARTNERS\Documents\GitHub\DevPartnersEmployeePortalTest\DevPartnersEmployeePortal\DPEP.Admin.UI\obj\Debug\netcoreapp1.1\DPEP.Admin.UI.pdb
+C:\Users\DEV PARTNERS\Documents\GitHub\DevPartnersEmployeePortalTest\DevPartnersEmployeePortalTest\DevPartnersEmployeePortal\DPEP.Admin.UI\bin\Debug\netcoreapp1.1\DPEP.Admin.UI.deps.json
+C:\Users\DEV PARTNERS\Documents\GitHub\DevPartnersEmployeePortalTest\DevPartnersEmployeePortalTest\DevPartnersEmployeePortal\DPEP.Admin.UI\bin\Debug\netcoreapp1.1\DPEP.Admin.UI.runtimeconfig.json
+C:\Users\DEV PARTNERS\Documents\GitHub\DevPartnersEmployeePortalTest\DevPartnersEmployeePortalTest\DevPartnersEmployeePortal\DPEP.Admin.UI\bin\Debug\netcoreapp1.1\DPEP.Admin.UI.runtimeconfig.dev.json
+C:\Users\DEV PARTNERS\Documents\GitHub\DevPartnersEmployeePortalTest\DevPartnersEmployeePortalTest\DevPartnersEmployeePortal\DPEP.Admin.UI\bin\Debug\netcoreapp1.1\DPEP.Admin.UI.dll
+C:\Users\DEV PARTNERS\Documents\GitHub\DevPartnersEmployeePortalTest\DevPartnersEmployeePortalTest\DevPartnersEmployeePortal\DPEP.Admin.UI\bin\Debug\netcoreapp1.1\DPEP.Admin.UI.pdb
+C:\Users\DEV PARTNERS\Documents\GitHub\DevPartnersEmployeePortalTest\DevPartnersEmployeePortalTest\DevPartnersEmployeePortal\DPEP.Admin.UI\bin\Debug\netcoreapp1.1\DPEP.Common.BLL.dll
+C:\Users\DEV PARTNERS\Documents\GitHub\DevPartnersEmployeePortalTest\DevPartnersEmployeePortalTest\DevPartnersEmployeePortal\DPEP.Admin.UI\bin\Debug\netcoreapp1.1\DPEP.Common.DAL.dll
+C:\Users\DEV PARTNERS\Documents\GitHub\DevPartnersEmployeePortalTest\DevPartnersEmployeePortalTest\DevPartnersEmployeePortal\DPEP.Admin.UI\bin\Debug\netcoreapp1.1\DPEP.Common.BLL.pdb
+C:\Users\DEV PARTNERS\Documents\GitHub\DevPartnersEmployeePortalTest\DevPartnersEmployeePortalTest\DevPartnersEmployeePortal\DPEP.Admin.UI\bin\Debug\netcoreapp1.1\DPEP.Common.DAL.pdb
+C:\Users\DEV PARTNERS\Documents\GitHub\DevPartnersEmployeePortalTest\DevPartnersEmployeePortalTest\DevPartnersEmployeePortal\DPEP.Admin.UI\obj\Debug\netcoreapp1.1\DPEP.Admin.UI.csprojResolveAssemblyReference.cache
+C:\Users\DEV PARTNERS\Documents\GitHub\DevPartnersEmployeePortalTest\DevPartnersEmployeePortalTest\DevPartnersEmployeePortal\DPEP.Admin.UI\obj\Debug\netcoreapp1.1\DPEP.Admin.UI.AssemblyInfo.cs
+C:\Users\DEV PARTNERS\Documents\GitHub\DevPartnersEmployeePortalTest\DevPartnersEmployeePortalTest\DevPartnersEmployeePortal\DPEP.Admin.UI\obj\Debug\netcoreapp1.1\DPEP.Admin.UI.dll
+C:\Users\DEV PARTNERS\Documents\GitHub\DevPartnersEmployeePortalTest\DevPartnersEmployeePortalTest\DevPartnersEmployeePortal\DPEP.Admin.UI\obj\Debug\netcoreapp1.1\DPEP.Admin.UI.pdb
