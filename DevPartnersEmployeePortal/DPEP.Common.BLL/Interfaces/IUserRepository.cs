@@ -8,10 +8,7 @@ namespace DPEP.Common.BLL.Interfaces
 {
     public interface IUserRepository
     {
-        IEnumerable<AspNetUser> GetAllUsers();
-        AspNetUser GetUser(int id);
-        void AddUser(AddUpModel user);
-        void RemoveUser(int id);
-        Task<string> GenerateEmail(string userEmail, string uri);
+        Task<CreatedUserModel> NewAccountAsync(AddUpModel model, string user);
+        Task<string> GenerateEmailConfirmation(string userEmail, string referenceCode, string uri);
     }
 }

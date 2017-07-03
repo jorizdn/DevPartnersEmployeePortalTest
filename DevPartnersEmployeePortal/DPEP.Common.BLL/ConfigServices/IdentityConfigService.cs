@@ -1,11 +1,9 @@
-﻿using System;
-using DPEP.Common.DAL.Identity;
+﻿using DPEP.Common.DAL.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using DPEP.Common.DAL.Entities;
 
 namespace DPEP.Common.BLL.ConfigServices
 {
@@ -15,14 +13,15 @@ namespace DPEP.Common.BLL.ConfigServices
         {
 
             //Identity Database Tables
-            services.AddDbContext<DevPartnersEmployeeContext>(options => options.UseSqlServer(dbConnection));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(dbConnection));
 
-            //Identity Configuration
-            services.AddIdentity<ApplicationUser, IdentityRole<int>>(opt => {
+            ////Identity Configuration
+            services.AddIdentity<ApplicationUser, IdentityRole<int>>(opt =>
+            {
 
 
             })
-                .AddEntityFrameworkStores<DevPartnersEmployeeContext, int>()
+                .AddEntityFrameworkStores<ApplicationDbContext, int>()
                 .AddDefaultTokenProviders();
 
             services.AddScoped<RoleManager<IdentityRole<int>>>();

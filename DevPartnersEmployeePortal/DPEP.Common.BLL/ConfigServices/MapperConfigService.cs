@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
+using DPEP.Common.BLL.Interfaces;
+using DPEP.Common.BLL.Repositories;
 using DPEP.Common.DAL.Entities;
 using DPEP.Common.DAL.Identity;
 using DPEP.Common.DAL.Model;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DPEP.Common.BLL.ConfigServices
 {
@@ -15,21 +15,34 @@ namespace DPEP.Common.BLL.ConfigServices
         public MapperProfile()
         {
             CreateMap<ApplicationUser, UserModel>();
+
             CreateMap<AccountModel, ApplicationUser>()
                .ForMember(c => c.CreatedDate, f => f.ResolveUsing(c => DateTime.UtcNow))
                .ForMember(c => c.UserName, f => f.ResolveUsing(c => c.Email.Split('@')[0]))
                .ForMember(c => c.IsActive, f => f.ResolveUsing(c => true));
+
+            CreateMap<ApplicationUser, AspNetUser>();
+
             CreateMap<AddUpModel, AspNetUser>();
+
             CreateMap<AddUpModel, Company>()
-                .ForMember(dest => dest.CompanyCode, opt => opt.MapFrom(src => src.employeeID))
-                .ForMember(dest => dest.EmailAddress, opt => opt.MapFrom(src => src.emailAddress));
+                .ForMember(a => a.EmailAddress, a => a.MapFrom(src => src.emailAddress))
+                .ForMember(a => a.CompanyCode, a => a.MapFrom(b => b.employeeID));
+
+            CreateMap<Company, AspNetUser>()
+                .ForMember(a => a.CompanyId, a => a.MapFrom(b => b.CompanyId));
+
             CreateMap<AddUpModel, ApplicationUser>()
                .ForMember(c => c.CreatedDate, f => f.ResolveUsing(c => DateTime.UtcNow))
                .ForMember(c => c.UserName, f => f.ResolveUsing(c => c.emailAddress.Split('@')[0]))
                .ForMember(c => c.IsActive, f => f.ResolveUsing(c => true));
+
             CreateMap<IOptions<AppSettingModel>, AppSettingModel>();
+
+            CreateMap<IUserRepository, UserRepository>();
             CreateMap<ApplicationUser, CreatedUserModel>();
             CreateMap<ApplicationUser, UserModel>();
+            CreateMap<ApplicationUser, AccountModel>();
         }
     }
 

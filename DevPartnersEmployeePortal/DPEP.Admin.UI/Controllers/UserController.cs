@@ -1,70 +1,73 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using DPEP.Common.BLL.Interfaces;
-using DPEP.Common.DAL.Model;
-using DPEP.Common.DAL.Entities;
 using DPEP.Common.BLL.Helpers;
+using DPEP.Common.BLL.Interfaces;
+using DPEP.Common.DAL.Entities;
+using DPEP.Common.DAL.Model;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace DPEP.Admin.UI.Controllers
 {
     [Produces("application/json")]
     [Route("/User")]
-    public class UserController : Controller
+    public class UserController : Controller //: BaseController
     {
         private readonly IUserRepository _user;
         private readonly DevPartnersEmployeeContext _context;
         private readonly ResponseBadRequest _badRequest;
-        public UserController(IUserRepository user, DevPartnersEmployeeContext context, ResponseBadRequest badRequest)
+        public UserController(
+            DevPartnersEmployeeContext context, 
+            IUserRepository user,
+            ResponseBadRequest badRequest)
         {
             _user = user;
             _context = context;
             _badRequest = badRequest;
         }
 
-        [HttpGet]
-        public IEnumerable<AspNetUser> GetAllUsers()
-        {
-            return _user.GetAllUsers();
-        }
-         
-
-        [HttpGet("{id}")]
-        public AspNetUser GetUser([FromRoute] int id)
-        {
-            return _user.GetUser(id);
-        }
-
         [HttpPost]
-        public IActionResult PostUser([FromBody] AddUpModel user)
+        public async Task<IActionResult> NewUserAsync([FromBody] AddUpModel model)
         {
             var uri = HttpContext.Request.Host.Value;
+            var user = await _user.NewAccountAsync(model, "");
+            if (user == null)
+            {
+                return BadRequest(new
+                {
+                    error = _badRequest.ShowError(
+                             _badRequest.ErrAccountDuplication
+                            )
+                });
+            }
+            //Send Verification Email to User
+            //try
+            //{
+            //    var code = await _user.GenerateEmailConfirmation(model.Email, "", "");
+            //}
+            //catch (System.Exception ex)
+            //{
+            //    return BadRequest(new
+            //    {
+            //        error = ex.Message,
+            //        errorstack = ex.StackTrace
+            //    });
+            //}
 
-            _user.AddUser(user);
-            _user.GenerateEmail(user.emailAddress, uri);
+            //return CreatedAtAction("Index", "Home", new
+            //{
+            //    username = user.Username
+            //}, new
+            //{
+            //    data = user,
+            //    link = new
+            //    {
+            //        self = Url.Action("Index", "Home", new
+            //        {
+            //            username = user.Username
+            //        }, Request.Scheme)
+            //    }
+            //});
 
             return Ok();
         }
-
-        [HttpDelete("{id}")]
-        public IActionResult DeleteUser([FromRoute] int id)
-        {
-            if (_user.GetUser(id) != null)
-            {
-                _user.RemoveUser(id);
-                return Ok();
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
-
-
     }
-
-    
 }

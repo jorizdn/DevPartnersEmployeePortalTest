@@ -26,9 +26,37 @@ namespace DPEP.Admin.UI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login([FromBody] LoginModel model)
+        public async Task<IActionResult> LoginAsync([FromBody] LoginModel model)
         {
-            return Ok();
+            var user = await _authenticate.LoginThenReturnUser(model);
+
+            if (user != null)
+            {
+                if (!user.EmailConfirmed)
+                {
+                    return BadRequest(new
+                    {
+                        error = _badRequest.ShowError(_badRequest.ErrUserUnverified)
+                    });
+                }
+
+                return AcceptedAtAction("GetUser", "UserHome", new
+                {
+                    username = user.UserName
+                }, new
+                {
+                    data = user,
+                    link = new
+                    {
+                        self = Url.Action("GetUser", "UserHome", new
+                        {
+                            username = user.UserName
+                        }, Request.Scheme)
+                    }
+                });
+            }
+
+            return BadRequest(_badRequest.ShowError(_badRequest.ErrAuthenticationFailed));
+          }
         }
     }
-}

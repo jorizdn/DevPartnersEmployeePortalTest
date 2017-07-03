@@ -11,5 +11,10 @@ namespace DPEP.Common.DAL.Identity
         public string LastName { get; set; }
         public DateTime CreatedDate { get; set; }
         public bool IsActive { get; set; }
+        public int CountryId { get; set; }
+        public string State { get; set; }
+        public string OrganizationName { get; set; }
+        public string AppId { get; set; }
+        public int? ExternalLoginTypeId { get; set; }
     }
 }

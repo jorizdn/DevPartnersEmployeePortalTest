@@ -20,7 +20,7 @@ namespace DPEP.Admin.UI.Controllers
         }
         public IActionResult Index()
         {
-            return View(_user.GetAllUsers());
+            return View(_context.AspNetUser);
         }
 
         public IActionResult About()
@@ -30,10 +30,8 @@ namespace DPEP.Admin.UI.Controllers
             return View();
         }
 
-        public IActionResult Contact()
+        public IActionResult Employee()
         {
-            ViewData["Message"] = "Your contact page.";
-
             return View();
         }
 

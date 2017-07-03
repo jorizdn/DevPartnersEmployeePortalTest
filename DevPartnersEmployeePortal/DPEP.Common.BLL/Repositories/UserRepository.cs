@@ -1,74 +1,102 @@
-﻿using DPEP.Common.BLL.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using DPEP.Common.DAL.Entities;
-using DPEP.Common.DAL.Model;
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-using DPEP.Common.DAL.Identity;
-using DPEP.Common.BLL.Methods;
+﻿using AutoMapper;
 using DPEP.Common.BLL.Helpers;
-using Microsoft.AspNetCore.Mvc;
+using DPEP.Common.BLL.Interfaces;
+using DPEP.Common.BLL.Methods;
+using DPEP.Common.DAL.Entities;
+using DPEP.Common.DAL.Identity;
+using DPEP.Common.DAL.Model;
+using Microsoft.AspNetCore.Identity;
+using System;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace DPEP.Common.BLL.Repositories
 {
     public class UserRepository : IUserRepository
     {
+        private const string Role = "Client";
+        private const string Claim = "IsClient";
+
         private readonly DevPartnersEmployeeContext _context;
         private readonly SendEmail _sendEmail;
         private readonly ResponseBadRequest _badRequest;
+        private readonly GUIDMethod _guidMethod;
 
         private readonly IMapper _mapper;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public UserRepository(DevPartnersEmployeeContext context,IMapper mapper, SendEmail sendEmail, UserManager<ApplicationUser> userManager, ResponseBadRequest badRequest)
+        public UserRepository(DevPartnersEmployeeContext context,IMapper mapper, SendEmail sendEmail, UserManager<ApplicationUser> userManager, ResponseBadRequest badRequest, GUIDMethod guidMethod)
         {
             _context = context;
             _mapper = mapper;
             _sendEmail = sendEmail;
             _userManager = userManager;
             _badRequest = badRequest;
+            _guidMethod = guidMethod;
         }
 
-        public void AddUser(AddUpModel user)
+        public async Task<CreatedUserModel> NewAccountAsync(AddUpModel model, string uri)
         {
-            var company = Mapper.Map<Company>(user);
-            _context.Company.Add(company);
-            _context.SaveChanges();
 
-            var aspNetUser = Mapper.Map<AspNetUser>(user);
-            aspNetUser.CompanyId = company.CompanyId;
-            aspNetUser.DateCreated = DateTime.Now;
-            _context.AspNetUser.Add(aspNetUser);
-            _context.SaveChanges();
+            var email =  _context.Company.Where(a => a.EmailAddress == model.emailAddress).SingleOrDefault();
+
+            if (email == null)
+            {
+
+                var user = _mapper.Map<ApplicationUser>(model);
+                var asp = _mapper.Map<AspNetUser>(user);
+                var compa = _mapper.Map<Company>(model);
+                _context.Company.Add(compa);
+                _context.SaveChanges();
+
+                asp.CompanyId = compa.CompanyId;
+                asp.DateCreated = DateTime.UtcNow;
+
+                _context.AspNetUser.Add(asp);
+                _context.SaveChanges();
+                //var company = _mapper.Map<Company>(model);
+                // //var roleResult = await _userManager.AddToRoleAsync(user, Role);
+                // //var claimResult = await _userManager.AddClaimAsync(user, new Claim(Claim, "True"));
+
+                // //if (!roleResult.Succeeded || !claimResult.Succeeded)
+                // //{
+
+                // //    await _context.ErrorLogs.AddAsync(new ErrorLogs
+                // //    {
+                // //        ErrorMessage = string.Join(" xx | xx ", "gffd")
+                // //    });
+
+                // //    return null;
+                // //}
+                // ////Update UserId
+
+                 var mapper = _mapper.Map<CreatedUserModel>(user);
+                // mapper.Token = await GenerateEmailConfirmation(user.Email,"", uri);
+                //// mapper.GUID = _guidMethod.GetGUIByUserId(user.Id);
+
+                // mapper.Claim = new ClaimType
+                // {
+                //     Value = "True",
+                //     Type = Claim
+                // };
+
+                // mapper.Role = Role;
+
+                return mapper;
+
+            }
+
+            return null;
         }
 
-        public IEnumerable<AspNetUser> GetAllUsers()
-        {
-            return _context.AspNetUser;
-        }
-
-        public AspNetUser GetUser(int id)
-        {
-            return _context.AspNetUser.FirstOrDefault(a => a.AspNetUserId == id);
-        }
-
-        public void RemoveUser(int id)
-        {
-            _context.AspNetUser.Remove(_context.AspNetUser.Find(id));
-            _context.Company.Remove(_context.Company.Find(id));
-            _context.SaveChanges();
-        }
-
-        public async Task<string> GenerateEmail(string userEmail, string uri)
+        public async Task<string> GenerateEmailConfirmation(string userEmail, string referenceCode, string uri)
         {
 
             var user = await _userManager.FindByEmailAsync(userEmail);
-            if (user != null)
+            var com = _context.Company.Where(a => a.EmailAddress == userEmail).FirstOrDefault();
+
+            if (com == null)
             {
 
                 var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -82,8 +110,10 @@ namespace DPEP.Common.BLL.Repositories
                                 where company.EmailAddress == userEmail
                                 select cn.FirstName + " " + cn.LastName).FirstOrDefault();
 
-                var confirmUrl = "http://" + uri + $"/user/verification?guid={userGuid}&token={token}";
+                var confirmUrl = "http://" + uri + $"/user/verification?guid={userGuid}&referenceCode={referenceCode}&token={token}&isFinalize=true";
                 await _sendEmail.SendNow("Verify your account", "VerificationEmail-Template", userEmail, true, fullName, confirmUrl.Replace("api/", ""), uri, "", "", "");
+
+                return token;
             }
 
             return null;

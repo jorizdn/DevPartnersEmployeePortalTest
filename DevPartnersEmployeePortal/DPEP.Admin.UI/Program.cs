@@ -12,7 +12,9 @@ namespace DPEP.Admin.UI
         public static void Main(string[] args)
         {
             var host = new WebHostBuilder()
+                //                .UseKestrel(opt => opt.UseHttps(cert))
                 .UseKestrel()
+                //                .UseUrls("https://localhost:44367")
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
