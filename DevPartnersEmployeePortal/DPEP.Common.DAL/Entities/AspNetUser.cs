@@ -18,7 +18,7 @@ namespace DPEP.Common.DAL.Entities
         public int? PositionId { get; set; }
         public int? RoleId { get; set; }
         public int? CompanyId { get; set; }
-        public int? JobTypeId { get; set; }
+        public int? JobTypeID { get; set; }
         public int? CategoryId { get; set; }
         public int? UserStatusId { get; set; }
         public string ProfilePicture { get; set; }

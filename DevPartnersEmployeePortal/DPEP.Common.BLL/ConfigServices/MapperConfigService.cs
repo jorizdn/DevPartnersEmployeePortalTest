@@ -7,6 +7,7 @@ using DPEP.Common.DAL.Identity;
 using DPEP.Common.DAL.Model;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using System.Linq;
 using System;
 
 namespace DPEP.Common.BLL.ConfigServices
@@ -50,6 +51,11 @@ namespace DPEP.Common.BLL.ConfigServices
             CreateMap<Company, ApplicationUser>()
                 .ForMember(a => a.Email, a => a.MapFrom(b => b.EmailAddress))
                 .ForMember(a => a.CompanyId,  a => a.MapFrom(b => b.CompanyCode));
+            #endregion
+
+            #region from AspNetUser to TEntity
+            CreateMap<AspNetUser, UserDetails>();
+               // .ForMember(a => a.CompanyCode, a => a.ResolveUsing(b => b.CompanyId.));
             #endregion
 
         }

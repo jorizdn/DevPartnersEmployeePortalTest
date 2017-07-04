@@ -11,5 +11,6 @@ namespace DPEP.Common.BLL.Interfaces
         Task<CreatedUserModel> NewAccountAsync(AddUpModel model, string user);
         Task<string> GenerateEmailConfirmation(string userEmail, string referenceCode, string uri);
         void UpdateUser(UpdateInfoModel model, int id);
+        IEnumerable<AspNetUser> GetUsers();
     }
 }

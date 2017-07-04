@@ -6,7 +6,9 @@ using DPEP.Common.DAL.Entities;
 using DPEP.Common.DAL.Identity;
 using DPEP.Common.DAL.Model;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -119,7 +121,8 @@ namespace DPEP.Common.BLL.Repositories
 
         public void UpdateUser(UpdateInfoModel model, int id)
         {
-            var user = _context.AspNetUser.Where(a => a.CompanyId == id).SingleOrDefault();
+            var user = _context.AspNetUser.Where(a => a.AspNetUserId == id).SingleOrDefault();
+
             user.Address = model.Address;
             user.FirstName = model.FirstName;
             user.MiddleName = model.MiddleName;
@@ -129,11 +132,16 @@ namespace DPEP.Common.BLL.Repositories
             user.Password = model.Password;
             user.Gender = model.Gender;
 
-            var my = _mapper.Map<AspNetUser>(model);
+            //var my = _mapper.Map<AspNetUser>(model);
 
             _context.Entry(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
 
             _context.SaveChanges();
+        }
+
+        public IEnumerable<AspNetUser> GetUsers()
+        {
+            return _context.AspNetUser;
         }
 
     }

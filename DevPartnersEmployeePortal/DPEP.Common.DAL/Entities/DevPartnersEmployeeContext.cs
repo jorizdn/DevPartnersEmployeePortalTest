@@ -75,7 +75,7 @@ namespace DPEP.Common.DAL.Entities
 
                 entity.Property(e => e.DateCreated).HasColumnType("datetime");
 
-                entity.Property(e => e.JobTypeId).HasColumnName("JobTypeID");
+                entity.Property(e => e.JobTypeID).HasColumnName("JobTypeID");
 
                 entity.Property(e => e.Password).HasMaxLength(50);
 
