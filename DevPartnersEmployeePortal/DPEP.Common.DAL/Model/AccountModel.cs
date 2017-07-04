@@ -9,5 +9,7 @@
         public string Email { get; set; }
 
         public string CompanyID { get; set; }
+
+        public string ReferenceCode { get; set; }
     }
 }

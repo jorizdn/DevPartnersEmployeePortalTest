@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -51,15 +52,15 @@ namespace DPEP.Common.BLL.Repositories
         {
 
             var email = login.Email;
-
-            var user = await _userManager.FindByEmailAsync(email);
+            var company = _context.Company.Where(a => a.EmailAddress == email).SingleOrDefault();
+            var user = await _userManager.FindByIdAsync(company.CompanyId.ToString());
 
             if (user != null)
             {
 
                 var signin = await _manager.PasswordSignInAsync(user.UserName, login.Password, login.RememberMe, lockoutOnFailure: false);
 
-                if (signin.Succeeded && user.IsActive)
+                if (signin.Succeeded && user.IsActive)     
                 {
 
                     var mapped = _mapper.Map<UserModel>(user);
@@ -74,7 +75,9 @@ namespace DPEP.Common.BLL.Repositories
         private async Task AddNewRole()
         {
 
-            if (!await _roleManager.RoleExistsAsync(_role))
+            if (!await _roleManager.RoleExistsAsync(
+                
+                _role))
             {
 
                 var role = new IdentityRole<int>(_role);

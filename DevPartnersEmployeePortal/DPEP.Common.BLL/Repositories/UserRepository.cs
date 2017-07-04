@@ -8,7 +8,6 @@ using DPEP.Common.DAL.Model;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace DPEP.Common.BLL.Repositories
@@ -51,7 +50,10 @@ namespace DPEP.Common.BLL.Repositories
                 _context.SaveChanges();
 
                 asp.CompanyId = compa.CompanyId;
-                asp.DateCreated = DateTime.UtcNow;
+                //asp.DateCreated = DateTime.UtcNow;
+                //asp.CategoryId = model.CategoryId;
+                //asp.PositionId = model.PositionId;
+                //asp.JobTypeId = model.JobTypeId;
 
                 _context.AspNetUser.Add(asp);
                 _context.SaveChanges();
@@ -72,7 +74,7 @@ namespace DPEP.Common.BLL.Repositories
                 // ////Update UserId
 
                  var mapper = _mapper.Map<CreatedUserModel>(user);
-                // mapper.Token = await GenerateEmailConfirmation(user.Email,"", uri);
+                //mapper.Token = await GenerateEmailConfirmation(model.emailAddress, "", uri);
                 //// mapper.GUID = _guidMethod.GetGUIByUserId(user.Id);
 
                 // mapper.Claim = new ClaimType
@@ -92,14 +94,12 @@ namespace DPEP.Common.BLL.Repositories
 
         public async Task<string> GenerateEmailConfirmation(string userEmail, string referenceCode, string uri)
         {
-
-            var user = await _userManager.FindByEmailAsync(userEmail);
             var com = _context.Company.Where(a => a.EmailAddress == userEmail).FirstOrDefault();
+            var user = _context.AspNetUser.Where(a => a.CompanyId == com.CompanyId).SingleOrDefault();
+            var appUser = _mapper.Map<ApplicationUser>(user);
 
-            if (com == null)
-            {
-
-                var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+           
+                var token = await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
 
                 var company = _context.Company.Find(userEmail);
                 var userGuid = (from cn in _context.AspNetUser
@@ -114,9 +114,26 @@ namespace DPEP.Common.BLL.Repositories
                 await _sendEmail.SendNow("Verify your account", "VerificationEmail-Template", userEmail, true, fullName, confirmUrl.Replace("api/", ""), uri, "", "", "");
 
                 return token;
-            }
+           
+        }
 
-            return null;
+        public void UpdateUser(UpdateInfoModel model, int id)
+        {
+            var user = _context.AspNetUser.Find(id);
+            user.Address = model.Address;
+            user.BirthDate = model.BirthDate;
+            user.FirstName = model.FirstName;
+            user.MiddleName = model.MiddleName;
+            user.LastName = model.LastName;
+            user.UserName = model.UserName;
+            user.Password = model.Password;
+            user.Gender = model.Gender;
+
+            var my = _mapper.Map<AspNetUser>(model);
+
+            _context.Entry(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+            _context.SaveChanges();
         }
 
     }

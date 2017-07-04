@@ -14,9 +14,4 @@ namespace DPEP.Common.DAL.Model
         [JsonIgnore]
         public bool EmailConfirmed { get; set; }
     }
-
-    public class UserDetails
-    {
-        public UserModel User { get; set; }
-    }
 }

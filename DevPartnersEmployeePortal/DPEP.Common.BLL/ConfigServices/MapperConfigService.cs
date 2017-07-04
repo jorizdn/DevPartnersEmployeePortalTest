@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DPEP.Common.BLL.Helpers;
 using DPEP.Common.BLL.Interfaces;
 using DPEP.Common.BLL.Repositories;
 using DPEP.Common.DAL.Entities;
@@ -14,35 +15,43 @@ namespace DPEP.Common.BLL.ConfigServices
     {
         public MapperProfile()
         {
+            CreateMap<UpdateInfoModel, AspNetUser>();
+            CreateMap<AddUpModel, Company>()
+                .ForMember(a => a.EmailAddress, a => a.MapFrom(src => src.emailAddress))
+                .ForMember(a => a.CompanyCode, a => a.MapFrom(b => b.employeeID));
+
+            CreateMap<IOptions<AppSettingModel>, AppSettingModel>();
+            CreateMap<IUserRepository, UserRepository>();
+
+
+            #region from ApplicationUser to TEntity
             CreateMap<ApplicationUser, UserModel>();
+
+            CreateMap<ApplicationUser, AspNetUser>()
+               .ForMember(a => a.DateCreated, a => a.MapFrom(b => b.CreatedDate));
+
+            CreateMap<ApplicationUser, CreatedUserModel>();
+
+            CreateMap<ApplicationUser, UserModel>();
+
+            CreateMap<ApplicationUser, AccountModel>();
+            #endregion
+
+            #region  from TEntity to ApplicationUser
+            CreateMap<AddUpModel, ApplicationUser>()
+               .ForMember(c => c.CreatedDate, f => f.ResolveUsing(c => DateTime.UtcNow))
+               .ForMember(c => c.UserName, f => f.ResolveUsing(c => c.emailAddress.Split('@')[0]));
 
             CreateMap<AccountModel, ApplicationUser>()
                .ForMember(c => c.CreatedDate, f => f.ResolveUsing(c => DateTime.UtcNow))
                .ForMember(c => c.UserName, f => f.ResolveUsing(c => c.Email.Split('@')[0]))
                .ForMember(c => c.IsActive, f => f.ResolveUsing(c => true));
 
-            CreateMap<ApplicationUser, AspNetUser>();
+            CreateMap<Company, ApplicationUser>()
+                .ForMember(a => a.Email, a => a.MapFrom(b => b.EmailAddress))
+                .ForMember(a => a.CompanyId,  a => a.MapFrom(b => b.CompanyCode));
+            #endregion
 
-            CreateMap<AddUpModel, AspNetUser>();
-
-            CreateMap<AddUpModel, Company>()
-                .ForMember(a => a.EmailAddress, a => a.MapFrom(src => src.emailAddress))
-                .ForMember(a => a.CompanyCode, a => a.MapFrom(b => b.employeeID));
-
-            CreateMap<Company, AspNetUser>()
-                .ForMember(a => a.CompanyId, a => a.MapFrom(b => b.CompanyId));
-
-            CreateMap<AddUpModel, ApplicationUser>()
-               .ForMember(c => c.CreatedDate, f => f.ResolveUsing(c => DateTime.UtcNow))
-               .ForMember(c => c.UserName, f => f.ResolveUsing(c => c.emailAddress.Split('@')[0]))
-               .ForMember(c => c.IsActive, f => f.ResolveUsing(c => true));
-
-            CreateMap<IOptions<AppSettingModel>, AppSettingModel>();
-
-            CreateMap<IUserRepository, UserRepository>();
-            CreateMap<ApplicationUser, CreatedUserModel>();
-            CreateMap<ApplicationUser, UserModel>();
-            CreateMap<ApplicationUser, AccountModel>();
         }
     }
 

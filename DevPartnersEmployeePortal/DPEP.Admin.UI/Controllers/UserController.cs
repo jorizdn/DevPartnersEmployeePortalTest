@@ -9,13 +9,13 @@ namespace DPEP.Admin.UI.Controllers
 {
     [Produces("application/json")]
     [Route("/User")]
-    public class UserController : Controller //: BaseController
+    public class UserController : BaseController //: BaseController
     {
         private readonly IUserRepository _user;
         private readonly DevPartnersEmployeeContext _context;
         private readonly ResponseBadRequest _badRequest;
         public UserController(
-            DevPartnersEmployeeContext context, 
+            DevPartnersEmployeeContext context,
             IUserRepository user,
             ResponseBadRequest badRequest)
         {
@@ -69,5 +69,13 @@ namespace DPEP.Admin.UI.Controllers
 
             return Ok();
         }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateUser([FromRoute] int id, [FromBody] UpdateInfoModel model)
+        {
+            _user.UpdateUser(model, id);
+            return Ok();
+        }
+
     }
 }

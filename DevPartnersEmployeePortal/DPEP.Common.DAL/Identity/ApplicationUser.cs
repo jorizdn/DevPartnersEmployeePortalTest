@@ -16,5 +16,9 @@ namespace DPEP.Common.DAL.Identity
         public string OrganizationName { get; set; }
         public string AppId { get; set; }
         public int? ExternalLoginTypeId { get; set; }
+        public int? CategoryId { get; set; }
+        public int? PositionId { get; set; }
+        public int? JobTypeId { get; set; }
+        public string CompanyId { get; set; }
     }
 }
