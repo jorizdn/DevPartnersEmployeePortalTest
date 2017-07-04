@@ -119,12 +119,12 @@ namespace DPEP.Common.BLL.Repositories
 
         public void UpdateUser(UpdateInfoModel model, int id)
         {
-            var user = _context.AspNetUser.Find(id);
+            var user = _context.AspNetUser.Where(a => a.CompanyId == id).SingleOrDefault();
             user.Address = model.Address;
-            user.BirthDate = model.BirthDate;
             user.FirstName = model.FirstName;
             user.MiddleName = model.MiddleName;
             user.LastName = model.LastName;
+            user.BirthDate = model.BirthDate;
             user.UserName = model.UserName;
             user.Password = model.Password;
             user.Gender = model.Gender;
