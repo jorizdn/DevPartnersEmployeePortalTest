@@ -18,7 +18,7 @@ namespace DPEP.Common.DAL.Entities
         public int? PositionId { get; set; }
         public int? RoleId { get; set; }
         public int? CompanyId { get; set; }
-        public int? JobTypeID { get; set; }
+        public int? JobTypeId { get; set; }
         public int? CategoryId { get; set; }
         public int? UserStatusId { get; set; }
         public string ProfilePicture { get; set; }
@@ -34,6 +34,21 @@ namespace DPEP.Common.DAL.Entities
         public Guid? Guid { get; set; }
         public bool? IsVerified { get; set; }
         public Guid? Passcode { get; set; }
+        public string Email { get; set; }
+        public bool? EmailConfirmed { get; set; }
+        public bool? IsActive { get; set; }
+        public bool? LockoutEnabled { get; set; }
+        public DateTimeOffset? LockoutEnd { get; set; }
+        public string NormalizedEmail { get; set; }
+        public string NormalizedUserName { get; set; }
+        public string PhoneNumber { get; set; }
+        public bool? AccessFailedCount { get; set; }
+        public string ConcurrencyStamp { get; set; }
+        public string SecurityStamp { get; set; }
+        public bool? TwoFactorEnabled { get; set; }
+        public string AppId { get; set; }
+        public string AvatarPath { get; set; }
+        public int? ExternalLoginTypeId { get; set; }
 
         public virtual AspNetUserClaim AspNetUserClaim { get; set; }
         public virtual AspNetUserLogin AspNetUserLogin { get; set; }
@@ -42,5 +57,6 @@ namespace DPEP.Common.DAL.Entities
         public virtual ICollection<Leave> Leave { get; set; }
         public virtual ICollection<OverTime> OverTime { get; set; }
         public virtual ICollection<WorkHome> WorkHome { get; set; }
+        public virtual ExternalLoginType ExternalLoginType { get; set; }
     }
 }

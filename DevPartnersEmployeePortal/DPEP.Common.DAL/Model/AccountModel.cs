@@ -11,5 +11,7 @@
         public string CompanyID { get; set; }
 
         public string ReferenceCode { get; set; }
+
+        public string Password { get; set; }
     }
 }

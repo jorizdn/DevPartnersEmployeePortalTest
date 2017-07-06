@@ -22,7 +22,6 @@ namespace DPEP.Common.DAL.Identity
             builder.Entity<ApplicationUser>(entity => {
                 entity.ToTable("AspNetUser");
                 entity.Property(e => e.Id).HasColumnName("AspNetUserId");
-
             });
 
             builder.Entity<IdentityRole<int>>(entity => {

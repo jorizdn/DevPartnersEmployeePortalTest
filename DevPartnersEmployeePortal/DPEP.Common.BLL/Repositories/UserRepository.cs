@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace DPEP.Common.BLL.Repositories
@@ -48,6 +49,7 @@ namespace DPEP.Common.BLL.Repositories
                 var user = _mapper.Map<ApplicationUser>(model);
                 var asp = _mapper.Map<AspNetUser>(user);
                 var compa = _mapper.Map<Company>(model);
+                compa.CompanyCode = IdBuilder();
                 _context.Company.Add(compa);
                 _context.SaveChanges();
 
@@ -59,9 +61,6 @@ namespace DPEP.Common.BLL.Repositories
 
                 _context.AspNetUser.Add(asp);
                 _context.SaveChanges();
-                //var company = _mapper.Map<Company>(model);
-                // //var roleResult = await _userManager.AddToRoleAsync(user, Role);
-                // //var claimResult = await _userManager.AddClaimAsync(user, new Claim(Claim, "True"));
 
                 // //if (!roleResult.Succeeded || !claimResult.Succeeded)
                 // //{
@@ -75,7 +74,7 @@ namespace DPEP.Common.BLL.Repositories
                 // //}
                 // ////Update UserId
 
-                 var mapper = _mapper.Map<CreatedUserModel>(user);
+                var mapper = _mapper.Map<CreatedUserModel>(user);
                 //mapper.Token = await GenerateEmailConfirmation(model.emailAddress, "", uri);
                 //// mapper.GUID = _guidMethod.GetGUIByUserId(user.Id);
 
@@ -119,7 +118,7 @@ namespace DPEP.Common.BLL.Repositories
            
         }
 
-        public void UpdateUser(UpdateInfoModel model, int id)
+        public async Task UpdateUserAsync(UpdateInfoModel model, int id)
         {
             var user = _context.AspNetUser.Where(a => a.AspNetUserId == id).SingleOrDefault();
 
@@ -132,9 +131,15 @@ namespace DPEP.Common.BLL.Repositories
             user.Password = model.Password;
             user.Gender = model.Gender;
 
+            //var appUser = _mapper.Map<ApplicationUser>(user);
+
+            //var userResult = await _userManager.CreateAsync(appUser, model.Password);
+            //var roleResult = await _userManager.AddToRoleAsync(appUser, Role);
+            //var claimResult = await _userManager.AddClaimAsync(appUser, new Claim(Claim, "True"));
+
             //var my = _mapper.Map<AspNetUser>(model);
 
-            _context.Entry(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.Entry(user).State = EntityState.Modified;
 
             _context.SaveChanges();
         }
@@ -144,5 +149,10 @@ namespace DPEP.Common.BLL.Repositories
             return _context.AspNetUser;
         }
 
+        public string IdBuilder()
+        {
+            int count = _context.AspNetUser.Count();
+            return "DEV" + DateTime.Now.ToString("MM") + DateTime.Now.ToString("yy") + "-" + count.ToString("D3");
+        }
     }
 }

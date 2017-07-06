@@ -5,7 +5,7 @@ namespace DPEP.Common.DAL.Entities
 {
     public partial class JobType
     {
-        public int JobTypeId { get; set; }
+        public int JobId { get; set; }
         public string Name { get; set; }
     }
 }

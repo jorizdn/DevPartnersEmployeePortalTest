@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using DPEP.Common.BLL.Helpers;
 using DPEP.Common.BLL.Interfaces;
 using DPEP.Common.BLL.Repositories;
 using DPEP.Common.DAL.Entities;
@@ -7,7 +6,6 @@ using DPEP.Common.DAL.Identity;
 using DPEP.Common.DAL.Model;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using System.Linq;
 using System;
 
 namespace DPEP.Common.BLL.ConfigServices
@@ -16,10 +14,9 @@ namespace DPEP.Common.BLL.ConfigServices
     {
         public MapperProfile()
         {
-            CreateMap<UpdateInfoModel, AspNetUser>();
+            CreateMap<UpdateInfoModel, ApplicationUser>();
             CreateMap<AddUpModel, Company>()
-                .ForMember(a => a.EmailAddress, a => a.MapFrom(src => src.emailAddress))
-                .ForMember(a => a.CompanyCode, a => a.MapFrom(b => b.employeeID));
+                .ForMember(a => a.EmailAddress, a => a.MapFrom(src => src.emailAddress));
 
             CreateMap<IOptions<AppSettingModel>, AppSettingModel>();
             CreateMap<IUserRepository, UserRepository>();
@@ -51,11 +48,6 @@ namespace DPEP.Common.BLL.ConfigServices
             CreateMap<Company, ApplicationUser>()
                 .ForMember(a => a.Email, a => a.MapFrom(b => b.EmailAddress))
                 .ForMember(a => a.CompanyId,  a => a.MapFrom(b => b.CompanyCode));
-            #endregion
-
-            #region from AspNetUser to TEntity
-            CreateMap<AspNetUser, UserDetails>();
-               // .ForMember(a => a.CompanyCode, a => a.ResolveUsing(b => b.CompanyId.));
             #endregion
 
         }

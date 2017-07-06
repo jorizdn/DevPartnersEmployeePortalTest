@@ -10,10 +10,11 @@ namespace DPEP.Common.DAL.Model
         public string LastName { get; set; }
         public string Address { get; set; }
         public DateTime? BirthDate { get; set; }
-        [JsonProperty(PropertyName = "CompanyId")]
+        public string EmailAddress { get; set; }
         public string CompanyCode { get; set; }
         public string Position { get; set; }
         public string Category { get; set; }
+        public string JobType { get; set; }
         public string Gender { get; set; }
         public DateTime? DateCreated { get; set; }
     }

@@ -15,6 +15,7 @@ namespace DPEP.Common.DAL.Entities
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Company> Company { get; set; }
         public virtual DbSet<ErrorLogs> ErrorLogs { get; set; }
+        public virtual DbSet<ExternalLoginType> ExternalLoginType { get; set; }
         public virtual DbSet<FeedBack> FeedBack { get; set; }
         public virtual DbSet<FlagActions> FlagActions { get; set; }
         public virtual DbSet<JobType> JobType { get; set; }
@@ -67,6 +68,10 @@ namespace DPEP.Common.DAL.Entities
             {
                 entity.Property(e => e.AspNetUserId).HasColumnName("AspNetUserID");
 
+                entity.Property(e => e.AppId).HasColumnType("varchar(64)");
+
+                entity.Property(e => e.AvatarPath).HasMaxLength(150);
+
                 entity.Property(e => e.BirthDate).HasColumnType("date");
 
                 entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
@@ -75,9 +80,15 @@ namespace DPEP.Common.DAL.Entities
 
                 entity.Property(e => e.DateCreated).HasColumnType("datetime");
 
-                entity.Property(e => e.JobTypeID).HasColumnName("JobTypeID");
+                entity.Property(e => e.Email).HasMaxLength(256);
 
-                entity.Property(e => e.Password).HasMaxLength(50);
+                entity.Property(e => e.Guid).HasDefaultValueSql("newsequentialid()");
+
+                entity.Property(e => e.JobTypeId).HasColumnName("JobTypeID");
+
+                entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
+
+                entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
 
                 entity.Property(e => e.PositionId).HasColumnName("PositionID");
 
@@ -86,6 +97,11 @@ namespace DPEP.Common.DAL.Entities
                 entity.Property(e => e.UserName).HasMaxLength(50);
 
                 entity.Property(e => e.UserStatusId).HasColumnName("UserStatusID");
+
+                entity.HasOne(d => d.ExternalLoginType)
+                    .WithMany(p => p.AspNetUser)
+                    .HasForeignKey(d => d.ExternalLoginTypeId)
+                    .HasConstraintName("FK_ExternalLogin_AspNetUser");
             });
 
             modelBuilder.Entity<AspNetUserClaim>(entity =>
@@ -138,8 +154,6 @@ namespace DPEP.Common.DAL.Entities
 
             modelBuilder.Entity<Category>(entity =>
             {
-                entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
-
                 entity.Property(e => e.Name).HasMaxLength(50);
             });
 
@@ -164,6 +178,17 @@ namespace DPEP.Common.DAL.Entities
                 entity.Property(e => e.ErrorMessage).HasMaxLength(50);
 
                 entity.Property(e => e.ErrorStack).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<ExternalLoginType>(entity =>
+            {
+                entity.Property(e => e.Guid)
+                    .HasColumnName("GUID")
+                    .HasDefaultValueSql("newsequentialid()");
+
+                entity.Property(e => e.IsSupported).HasColumnType("nchar(10)");
+
+                entity.Property(e => e.Name).HasMaxLength(50);
             });
 
             modelBuilder.Entity<FeedBack>(entity =>
@@ -209,7 +234,8 @@ namespace DPEP.Common.DAL.Entities
 
             modelBuilder.Entity<JobType>(entity =>
             {
-                entity.Property(e => e.JobTypeId).HasColumnName("JobTypeID");
+                entity.HasKey(e => e.JobId)
+                    .HasName("PK_JobType");
 
                 entity.Property(e => e.Name).HasMaxLength(50);
             });

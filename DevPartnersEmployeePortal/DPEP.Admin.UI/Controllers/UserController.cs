@@ -80,7 +80,7 @@ namespace DPEP.Admin.UI.Controllers
         [HttpPut("{id}")]
         public IActionResult UpdateUser([FromRoute] int id, [FromBody] UpdateInfoModel model)
         {
-            _user.UpdateUser(model, id);
+            _user.UpdateUserAsync(model, id);
             return Ok();
         }
 
@@ -89,48 +89,31 @@ namespace DPEP.Admin.UI.Controllers
         {
             var asps = _user.GetUsers();
             List<UserDetails> userdetail = new List<UserDetails>() { };
-            foreach (var item in asps)
+            foreach (var item in _user.GetUsers())
             {
-                var com = _context.Company.SingleOrDefault(a => a.CompanyId == item.CompanyId);
-                var pos = _context.Position.SingleOrDefault(a => a.PositionId == item.PositionId);
-                var cat = _context.Category.SingleOrDefault(a => a.CategoryId == item.CategoryId);
-                var user = new UserDetails()
-                {
-                    FirstName = item.FirstName,
-                    MiddleName = item.MiddleName,
-                    LastName = item.LastName,
-                    Address = item.Address,
-                    CompanyCode = com.CompanyCode,
-                    BirthDate = item.BirthDate,
-                    Position = pos.Name,
-                    Category = cat.Name,
-                    Gender = (item.Gender == true) ? "Male" : "Female",
-                DateCreated = item.DateCreated
-                };
+                var user = (from a in _context.AspNetUser
+                            join p in _context.Company on a.CompanyId equals p.CompanyId
+                            join s in _context.Position on a.PositionId equals s.PositionId
+                            join b in _context.Category on a.CategoryId equals b.CategoryId
+                            join m in _context.JobType on a.JobTypeId equals m.JobId
+                           where a.AspNetUserId == item.AspNetUserId
+                            select new UserDetails
+                            {
+                                FirstName = a.FirstName,
+                                MiddleName = a.MiddleName,
+                                LastName = a.LastName,
+                                Address = a.Address,
+                                BirthDate = a.BirthDate,
+                                CompanyCode = p.CompanyCode,
+                                Position = s.Name,
+                                Category = b.Name,
+                                EmailAddress = p.EmailAddress,
+                                JobType = m.Name,
+                                Gender = (a.Gender == true) ? "Male" : "Female",
+                                DateCreated = a.DateCreated
+                            }).FirstOrDefault();
                 userdetail.Add(user);
             }
-
-            //return userdetail;
-
-            //return (from a in _context.AspNetUser
-            //        join p in _context.Company on a.CompanyId equals p.CompanyId
-            //        join s in _context.Position on a.PositionId equals s.PositionId
-            //        join d in 
-            //        select new UserDetails
-            //        {
-            //              FirstName = a.FirstName,
-            //              MiddleName = a.MiddleName,
-            //              LastName = a.LastName,
-            //              Address = a.Address,
-            //              BirthDate = a.BirthDate,
-            //              CompanyCode = p.CompanyCode,
-            //              Position = 
-            //              Category 
-            //              JobType 
-            //              Gender 
-            //              DateCreated 
-            //        }).FirstOrDefault();
-
             return userdetail;
         }
     }
